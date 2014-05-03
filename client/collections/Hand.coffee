@@ -6,6 +6,10 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
+    @trigger 'hit', @
+
+  stand: ->
+    @trigger 'stand', @
 
   scores: ->
     # The scores are an array of potential scores.
@@ -17,4 +21,5 @@ class window.Hand extends Backbone.Collection
     score = @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
-    if hasAce then [score, score + 10] else [score]
+    if hasAce and score + 10 <= 21 then [score + 10] else [score]
+
