@@ -2,8 +2,8 @@
 class window.App extends Backbone.Model
 
   initialize: ->
-    @set 'playerChips', 1000
-    @set 'betSize', 100
+    @set 'playerChips', playerChips = new Chips()
+
     do @deal
 
   playDealerHand: ->
@@ -24,7 +24,7 @@ class window.App extends Backbone.Model
   playerWin: ->
     @set 'inHand', false
     console.log(@get 'playerChips')
-    @set 'playerChips', @get 'playerChips' + @get 'betSize'
+    (@get 'playerChips').setChips((@get 'playerChips').get('playerChips') + (@get 'playerChips').get('bets'))
     console.log(@get 'playerChips')
     console.log('playerWin')
     console.log((@get 'playerHand') .scores())
@@ -34,7 +34,7 @@ class window.App extends Backbone.Model
 
   dealerWin: ->
     @set 'inHand', false
-    @set 'playerChips', @get 'playerChips' - @get 'betSize'
+    (@get 'playerChips').setChips((@get 'playerChips').get('playerChips') - (@get 'playerChips').get('bets'))
     console.log('dealerWin')
     console.log((@get 'playerHand') .scores())
     console.log((@get 'dealerHand') .scores())

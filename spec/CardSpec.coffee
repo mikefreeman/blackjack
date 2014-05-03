@@ -6,7 +6,7 @@ describe "card constructor", ->
     card = new Card
       rank: 10
       suit: 1
-    assert.strictEqual (card.get 'revealed'), true
+    assert.strictEqual (card.get 'revealed'), false
 
 describe "deck constructor", ->
   it "should create a card collection", ->
